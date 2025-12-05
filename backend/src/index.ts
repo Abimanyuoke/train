@@ -3,15 +3,7 @@ import cors from 'cors'
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import path from 'path'
-// import KosRoute from './routers/kosRoute'
-// import UserRoute from './routers/userRoute'
-// import LikeRoute from './routers/likeRoute'
-// import ReviewRoute from './routers/reviewRoute'
-// import BookRoute from './routers/bookRoute'
-// import KosFacilitiesRoute from './routers/kosFacilitiesRoute'
-// import KosImageRoute from './routers/kosImageRoute'
-// import BookingCalendarRoute from './routers/bookingCalendarRoute'
-// import NotificationRoute from './routers/notificationRoute'
+import userRoute from './routes/userRoute'
 
 
 import { PORT } from './global'
@@ -50,7 +42,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-// app.use(`/kos`, KosRoute)
+app.use(`/user`, userRoute)
 
 // Set public folder as static
 app.use(express.static(path.join(__dirname, '..', 'public')));

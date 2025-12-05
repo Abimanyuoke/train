@@ -10,7 +10,7 @@ CREATE TABLE `User` (
     `nik` INTEGER NOT NULL,
     `grade` VARCHAR(191) NOT NULL DEFAULT '',
     `profile_picture` VARCHAR(191) NOT NULL DEFAULT '',
-    `role` ENUM('penumpang', 'admin') NOT NULL,
+    `role` ENUM('admin', 'penumpang') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 

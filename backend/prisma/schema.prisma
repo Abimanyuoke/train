@@ -13,10 +13,12 @@ datasource db {
   provider = "mysql"
 }
 
+
 enum Role {
-  penumpang
   admin
+  penumpang
 }
+
 
 model User {
   id              Int               @id @default(autoincrement())

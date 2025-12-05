@@ -1,3 +1,8 @@
+enum Role {
+  admin
+  penumpang
+}
+
 
 model User {
   id              Int               @id @default(autoincrement())
