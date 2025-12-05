@@ -142,7 +142,7 @@ export const updateUser = async (request: Request, response: Response) => {
     }
 }
 
-const deleteUser = async (request: Request, response: Response) => {
+export const deleteUser = async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         const findUser = await prisma.user.findFirst({

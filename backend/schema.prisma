@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -22,8 +23,6 @@ model User {
   updatedAt       DateTime          @updatedAt
   pembelianTikets Pembelian_tiket[]
 
-
-  
   // kereta          Kereta[]       @relation("UserKereta")
   // reviews         Review[]
   // books           Book[]
@@ -84,19 +83,14 @@ model Pembelian_tiket {
 }
 
 model Detail_pembelian {
-  id             Int    @id @default(autoincrement())
-  NIK            String
-  nama_penumpang String
+  id                 Int             @id @default(autoincrement())
+  NIK                String
+  nama_penumpang     String
   id_pembelian_tiket Int
   pembelian          Pembelian_tiket @relation(fields: [id_pembelian_tiket], references: [id])
-  id_kursi Int
-  kursi    Kursi @relation(fields: [id_kursi], references: [id])
+  id_kursi           Int
+  kursi              Kursi           @relation(fields: [id_kursi], references: [id])
 }
-
-
-
-
-
 
 // model Kereta {
 //   id          Int      @id @default(autoincrement())
