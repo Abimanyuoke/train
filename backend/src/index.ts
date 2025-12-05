@@ -3,8 +3,10 @@ import cors from 'cors'
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import path from 'path'
+import dotenv from 'dotenv'
 import userRoute from './routes/userRoute'
 
+dotenv.config()
 
 import { PORT } from './global'
 
@@ -47,6 +49,8 @@ app.use(`/user`, userRoute)
 // Set public folder as static
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.listen(PORT, () => {
-    console.log(`[server]: Server is running at http://localhost:${PORT}`)
+const serverPort = PORT || 5000;
+
+app.listen(serverPort, () => {
+    console.log(`[server]: Server is running at http://localhost:${serverPort}`)
 })
