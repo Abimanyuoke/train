@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  admin
+  penumpang
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  uuid            String            @unique @default("")
+  name            String
+  email           String            @unique
+  password        String
+  phone           String
+  address         String            @default("")
+  nik             Int               @unique
+  grade           String            @default("")
+  profile_picture String            @default("")
+  role            Role
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  pembelianTikets Pembelian_tiket[]
+
+  // kereta          Kereta[]       @relation("UserKereta")
+  // reviews         Review[]
+  // books           Book[]
+  // notifications   Notification[]
+}
+
+model Kereta {
+  id          Int       @id @default(autoincrement())
+  uuid        String    @unique @default(uuid())
+  name        String
+  description String
+  kelas       String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  gerbong     Gerbong[]
+  jadwal      Jadwal[]
+}
+
+model Gerbong {
+  id       Int     @id @default(autoincrement())
+  uuid     String  @unique @default(uuid())
+  kouta    Int
+  keretaId Int
+  kereta   Kereta  @relation(fields: [keretaId], references: [id], onDelete: Cascade)
+  kursi    Kursi[]
+}
+
+model Kursi {
+  id               Int                @id @default(autoincrement())
+  uuid             String             @unique @default(uuid())
+  nomor            String
+  gerbongId        Int
+  gerbong          Gerbong            @relation(fields: [gerbongId], references: [id], onDelete: Cascade)
+  detailPembelians Detail_pembelian[]
+}
+
+model Jadwal {
+  id                    Int               @id @default(autoincrement())
+  uuid                  String            @unique @default(uuid())
+  asal_keberangkatan    String
+  tujuan_keberangkatan  String
+  tanggal_keberangkatan DateTime
+  tanggal_kedatangan    DateTime
+  harga                 Int
+  keretaId              Int
+  kereta                Kereta            @relation(fields: [keretaId], references: [id], onDelete: Cascade)
+  pembelianTikets       Pembelian_tiket[]
+}
+
+model Pembelian_tiket {
+  id                Int                @id @default(autoincrement())
+  tanggal_pembelian DateTime           @default(now())
+  userId            Int
+  user              User               @relation(fields: [userId], references: [id])
+  jadwalId          Int
+  jadwal            Jadwal             @relation(fields: [jadwalId], references: [id])
+  detail            Detail_pembelian[]
+}
+
+model Detail_pembelian {
+  id                 Int             @id @default(autoincrement())
+  NIK                String
+  nama_penumpang     String
+  id_pembelian_tiket Int
+  pembelian          Pembelian_tiket @relation(fields: [id_pembelian_tiket], references: [id])
+  id_kursi           Int
+  kursi              Kursi           @relation(fields: [id_kursi], references: [id])
+}
