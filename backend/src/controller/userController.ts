@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../generated/prisma/client";
 import { BASE_URL, SECRET } from "../global";
 import { v4 as uuidv4 } from "uuid";
 import { sign } from "jsonwebtoken";
 import md5 from "md5";
-import fs from "fs";
-
-const prisma = new PrismaClient({ errorFormat: "pretty" });
+import fs from "fs"
+const prisma = new PrismaClient({} as any);
 
 export const getAllUsers = async (request: Request, response: Response) => {
     try {
@@ -97,7 +96,7 @@ export const updateUser = async (request: Request, response: Response) => {
 
         const findUser = await prisma.user.findFirst({
             where: { id: Number(id) }
-        }); 
+        });
         if (!findUser) {
             return response.status(404).json({
                 status: false,
@@ -126,14 +125,14 @@ export const updateUser = async (request: Request, response: Response) => {
                 profile_picture: filename ? `${BASE_URL}/public/${filename}` : findUser.profile_picture,
             },
             where: { id: Number(id) }
-        
-            })
 
-            return response.status(200).json({
-                status: true,
-                data: updatedUser,
-                message: "user has been updated successfully",
-            });
+        })
+
+        return response.status(200).json({
+            status: true,
+            data: updatedUser,
+            message: "user has been updated successfully",
+        });
     } catch (error) {
         return response.status(500).json({
             status: false,
@@ -158,10 +157,10 @@ export const deleteUser = async (request: Request, response: Response) => {
         let exists = fs.existsSync(path);
         if (exists && findUser.profile_picture !== ``) fs.unlinkSync(path);
 
-        const deleteUser= await prisma.user.delete({
+        const deleteUser = await prisma.user.delete({
             where: { id: Number(id) }
         })
-        
+
         return response.status(200).json({
             status: true,
             data: deleteUser,
