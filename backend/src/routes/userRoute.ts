@@ -3,7 +3,7 @@ import { getAllUsers, getUserById, createUser, deleteUser, authentication, updat
 import uploadFile from '../middleware/profileUpload';
 
 
-const app  = express.Router();
+const app = express.Router();
 app.use(express.json());
 
 app.get('/', getAllUsers);
