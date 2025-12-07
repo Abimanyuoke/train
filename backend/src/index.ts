@@ -1,3 +1,5 @@
+console.log("Starting server...");
+
 import express from 'express'
 import cors from 'cors'
 import swaggerJsDoc from 'swagger-jsdoc'
@@ -38,7 +40,7 @@ const swaggerOptions = {
         },
         security: [{ bearerAuth: [] }],
     },
-    apis: ['./src/routers/*.ts'], // Path to the API docs
+    apis: ['./src/routes/*.ts'], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
