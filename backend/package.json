@@ -28,7 +28,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@prisma/adapter-mariadb": "^7.1.0",
     "@prisma/client": "^7.1.0",
     "axios": "^1.9.0",
     "cors": "^2.8.5",

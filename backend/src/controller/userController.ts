@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { BASE_URL, SECRET } from "../global";
 import { v4 as uuidv4 } from "uuid";
-import prisma from "../../lib/prisma";
 import { sign } from "jsonwebtoken";
 import md5 from "md5";
 import fs from "fs"
 
+const prismaModule = await import("../../generated/prisma/client");
+const { PrismaClient } = prismaModule;
+const prisma = new PrismaClient();
 
 
 export const getAllUsers = async (request: Request, response: Response) => {

@@ -17,17 +17,5 @@
 
 // export default prisma;
 
-const { PrismaClient } = require("../generated/prisma/client");
-const { PrismaMariaDb } = require("@prisma/adapter-mariadb");
-
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
-
-const prisma =
-  (global as any).prisma ||
-  new PrismaClient({ adapter });
-
-if (process.env.NODE_ENV !== "production") {
-  (global as any).prisma = prisma;
-}
-
-export default prisma;
+const { PrismaClient } = require("../generated/prisma/client")
+const prisma = new PrismaClient()
