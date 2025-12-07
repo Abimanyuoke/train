@@ -6,7 +6,7 @@ import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import path from 'path'
 import dotenv from 'dotenv'
-import userRoute from './routes/userRoute'
+import userRoute from '../../frontend/userRoute'
 
 dotenv.config()
 

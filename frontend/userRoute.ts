@@ -1,6 +1,6 @@
 import express from 'express'
-import { getAllUsers, getUserById, createUser, deleteUser, authentication, updateUser } from '../../../frontend/userController'
-import uploadFile from '../../../frontend/profileUpload';
+import { getAllUsers, getUserById, createUser, deleteUser, authentication, updateUser } from '../controller/userController'
+import uploadFile from '../middleware/profileUpload';
 
 
 const app = express.Router();
