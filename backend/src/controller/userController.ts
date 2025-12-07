@@ -5,10 +5,6 @@ import { sign } from "jsonwebtoken";
 import md5 from "md5";
 import fs from "fs"
 
-const prismaModule = await import("../../generated/prisma/client");
-const { PrismaClient } = prismaModule;
-const prisma = new PrismaClient();
-
 
 export const getAllUsers = async (request: Request, response: Response) => {
     try {
